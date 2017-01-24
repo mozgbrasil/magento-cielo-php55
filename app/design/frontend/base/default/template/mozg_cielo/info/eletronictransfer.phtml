@@ -1,0 +1,16 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php if ($_info = $this->getInfo()): ?>
+<?php $eletronictransfer = unserialize($this->getInfo()->getPoNumber())?>
+<?php echo Mage::helper('mozg_cielo')->__('Social Security Number: %s', $this->htmlEscape($eletronictransfer['social_security_number'])) ?><br/>
+<?php echo Mage::helper('mozg_cielo')->__('Firstname: %s', $this->htmlEscape($eletronictransfer['firstname'])) ?><br/>
+<?php echo Mage::helper('mozg_cielo')->__('Lastname: %s', $this->htmlEscape($eletronictransfer['lastname'])) ?><br/>
+
+<?php if($this->getInfo()->getOrder() != null) {
+	echo Mage::helper('mozg_cielo')->__('EletronicTransfer PDF: <a target="_blank" href="%s">Download</a>', $this->getInfo()->getOrder()->getMozgPaymentUrl()) ?><br/>
+<?php } ?>
+<?php endif; ?>

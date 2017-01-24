@@ -1,0 +1,26 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php $disabled = $this->getMethod()->getHppOptionsDisabled();?>
+<?php if($disabled): ?>
+<?php echo $this->htmlEscape($this->getMethod()->getTitle()) ?><br/>
+<?php endif; ?>
+
+<?php if ($_info = $this->getInfo()): ?>
+    <?php $paymentMethod = $_info->getCcType() ?>
+    <?php if (!empty($paymentMethod)): ?>
+        <?php echo $this->__('Payment Method: %s', $this->htmlEscape($_info->getAdditionalInformation('hpp_type_label'))) ?><br/>
+    <?php endif; ?>        
+    <?php if (strpos($paymentMethod, "ideal") !== false): ?>            
+        <?php $bankData = $_info->getPoNumber(); ?>
+        <?php if (!empty($bankData)) : ?>
+            <?php
+                $label = $_info->getAdditionalInformation('hpp_type_bank_label');
+            ?>
+            <?php echo $this->__('Bank: %s', $this->htmlEscape($label)) ?><br/>
+        <?php endif; ?>            
+    <?php endif; ?>
+<?php endif; ?>

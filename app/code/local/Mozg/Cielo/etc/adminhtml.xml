@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config>
+    <menu>
+        <sales>
+            <children>
+                <mozg_cielo module="mozg_cielo" translate="title">
+                    <title>Mozg Cielo Notification Queue</title>
+                    <sort_order>600</sort_order>
+                    <action>adminhtml/mozg_cielo_event_queue</action>
+                </mozg_cielo>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <sales>
+                        <children>
+                            <mozg_cielo translate="title">
+                                <title>Mozg Cielo Notification Queue</title>
+                                <sort_order>600</sort_order>
+                            </mozg_cielo>
+                        </children>
+                    </sales>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

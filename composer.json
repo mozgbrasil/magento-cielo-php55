@@ -1,0 +1,34 @@
+{
+    "name": "mozgbrasil/magento-cielo-php55",
+    "description": "Integração ao cielo",
+    "version": "1.0.0",
+    "type": "magento-module",
+    "keywords": ["cerebrum", "mozg", "magento", "payment", "pagamento", "cielo", "itaú"],
+    "homepage": "http://mozg.com.br",
+    "time": "2017-01-24 16:16:37",
+    "license": [
+        "proprietary"
+    ],
+    "authors": [
+        {
+            "name": "Mozg",
+            "email": "suporte@mozg.com.br",
+            "homepage": "http://mozg.com.br",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "suporte@mozg.com.br",
+        "issues": "https://github.com/mozgbrasil/magento-cielo-php55/issues",
+        "forum": "http://mozg.com.br/forums/view/1",
+        "wiki": "http://wiki.mozg.com.br",
+        "irc": "irc://irc.freenode.org/mozgbrasil",
+        "source": "https://github.com/mozgbrasil/magento-cielo-php55",
+        "docs": "https://github.com/mozgbrasil/magento-cielo-php55/wiki",
+        "rss": "https://mozg.com.br/feed.xml"
+    },
+    "require" : {
+        "mozgbrasil/magento-payment-php55": "1.0.0",
+        "mozgbrasil/cielo-braspag-sdk-php": "*"
+    }
+}

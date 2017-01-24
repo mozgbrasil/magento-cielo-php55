@@ -1,0 +1,56 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php echo $this->htmlEscape($this->getMethod()->getTitle()) ?><br/>
+<a target="_blank" href="<?php echo $this->getMethod()->getInfoInstance()->getAdditionalInformation('payment_url'); ?>">Payment Link</a><br />
+
+<?php if ($_info = $this->getInfo()): ?>
+    <?php if ($_info->getMozgPspReference() == ''): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Payment has not been processed yet.') ?> <br/>
+    <?php else :?>
+         <?php
+        $storeId = $this->getMethod()->getInfoInstance()->getOrder()->getStoreId();
+        if($this->getMethod()->getConfigDataDemoMode($storeId)): ?>
+
+        <?php else : ?>
+
+        <?php endif; ?>
+
+        <?php
+        $pspReference = $this->htmlEscape($_info->getMozgPspReference());
+        $url = Mage::helper('adminhtml')->getUrl('adminhtml/CieloConsulta/', array('pspReference' => $pspReference) );
+        ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Itáu PSP Reference: <a href="%s" target="_blank">%s</a>', $url, $pspReference) ?> <br/>
+
+    <?php endif;?>
+    <?php $paymentMethod = $_info->getCcType() ?>
+    <?php if (!empty($paymentMethod)): ?>
+        <?php echo $this->__('Payment Method: %s', $this->htmlEscape($paymentMethod)) ?><br/>
+    <?php endif; ?>
+    <?php if (strpos($_info->getCcType(), "ideal") !== false): ?>
+        <?php $bankData = $_info->getPoNumber(); ?>
+        <?php if (!empty($bankData)) : ?>
+            <?php
+            $id = explode(DS, $bankData);
+            $label = $id['1'];
+            ?>
+            <?php echo $this->__('Bank: %s', $this->htmlEscape($label)) ?><br/>
+        <?php endif; ?>
+    <?php endif; ?>
+    <?php if($_info->getMozgKlarnaNumber() != null && $_info->getMozgKlarnaNumber() != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Klarna reservation number: %s', $this->htmlEscape($_info->getMozgKlarnaNumber())) ?> <br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgRefusalReasonRaw()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Raw acquirer response: %s', $this->htmlEscape($this->getInfo()->getMozgRefusalReasonRaw())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgAuthCode()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Authorisation code: %s', $this->htmlEscape($this->getInfo()->getMozgAuthCode())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgAcquirerReference()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Acquirer reference: %s', $this->htmlEscape($this->getInfo()->getMozgAcquirerReference())) ?><br/>
+    <?php endif; ?>
+<?php endif; ?>
+

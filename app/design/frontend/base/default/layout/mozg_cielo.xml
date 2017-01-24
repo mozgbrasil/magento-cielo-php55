@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<layout version="0.1.0">
+    <mozg_updatecart_index>
+        <update handle="checkout_cart_index" />
+    </mozg_updatecart_index>
+
+    <checkout_cart_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/mozg_cielo/style.css</stylesheet>
+            </action>
+        </reference>
+    </checkout_cart_index>
+
+    <checkout_onepage_index>
+        <reference name="head">
+            <!--<action method="addJs">
+                <script>mozg_cielo/payment/cc.js</script>
+                <params><![CDATA[name=""]]></params>
+            </action>-->
+            <action method="addCss">
+                <stylesheet>css/mozg_cielo/style.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="after_body_start">
+            <block type="core/text" name="mozg.diners.validation" after="-">
+                <action method="setText">
+                    <text>
+                        <![CDATA[<script type="text/javascript">
+                            Validation.creditCartTypes.set('DC', [new RegExp('^3(?:0[0-5]|[68][0-9])[0-9]{11}$'), new RegExp('^[0-9]{3}$'), true]);
+                            Validation.creditCartTypes.set('CB', [new RegExp('^4[0-9]{12}([0-9]{3})?$'), new RegExp('^[0-9]{3}$'), true]);
+                            Validation.creditCartTypes.set('ELO', [new RegExp(/^((((636368)|(438935)|(504175)|(451416)|(636297)|(506699))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})$/), new RegExp('^[0-9]{3}$'), true]);
+                            Validation.creditCartTypes.set('hipercard', [new RegExp(/^(606282\d{10}(\d{3})?)|(3841\d{15})$/), new RegExp('^[0-9]{3}$'), true]);
+                            Validation.creditCartTypes.set('unionpay', [new RegExp('^62[0-5]\d{13,16}$'), new RegExp('^[0-9]{3}$'), true]);
+                        </script>]]>
+                    </text>
+                </action>
+            </block>
+        </reference>
+    </checkout_onepage_index>
+
+    <!-- For the Idev onestepcheckout module !-->
+    <onestepcheckout_index_index>
+        <reference name="head">
+            <!--<action method="addJs">
+                <script>mozg_cielo/payment/cc.js</script>
+                <params><![CDATA[name=""]]></params>
+            </action>-->
+            <action method="addCss">
+                <stylesheet>css/mozg_cielo/style.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="after_body_start">
+            <block type="core/text" name="mozg.diners.validation" after="-">
+                <action method="setText">
+                    <text>
+                        <![CDATA[<script type="text/javascript">
+                            Validation.creditCartTypes.set('DC', [new RegExp('^3(?:0[0-5]|[68][0-9])[0-9]{11}$'), new RegExp('^[0-9]{3}$'), true]);
+                            Validation.creditCartTypes.set('CB', [new RegExp('^4[0-9]{12}([0-9]{3})?$'), new RegExp('^[0-9]{3}$'), true]);
+                            Validation.creditCartTypes.set('ELO', [new RegExp(/^((((636368)|(438935)|(504175)|(451416)|(636297)|(506699))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})$/), new RegExp('^[0-9]{3}$'), true]);
+                            Validation.creditCartTypes.set('hipercard', [new RegExp(/^(606282\d{10}(\d{3})?)|(3841\d{15})$/), new RegExp('^[0-9]{3}$'), true]);
+                        </script>]]>
+                    </text>
+                </action>
+            </block>
+        </reference>
+    </onestepcheckout_index_index>
+
+    <!-- For the IWD onestep checkout module !-->
+    <opc_index_index>
+        <reference name="head">
+            <!--<action method="addJs">
+                <script>mozg_cielo/payment/cc.js</script>
+                <params><![CDATA[name=""]]></params>
+            </action>-->
+            <action method="addCss">
+                <stylesheet>css/mozg_cielo/style.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="after_body_start">
+            <block type="core/text" name="mozg.diners.validation" after="-">
+                <action method="setText">
+                    <text>
+                        <![CDATA[<script type="text/javascript">
+                            Validation.creditCartTypes.set('DC', [new RegExp('^3(?:0[0-5]|[68][0-9])[0-9]{11}$'), new RegExp('^[0-9]{3}$'), true]);
+                            Validation.creditCartTypes.set('CB', [new RegExp('^4[0-9]{12}([0-9]{3})?$'), new RegExp('^[0-9]{3}$'), true]);
+                            Validation.creditCartTypes.set('ELO', [new RegExp(/^((((636368)|(438935)|(504175)|(451416)|(636297)|(506699))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})$/), new RegExp('^[0-9]{3}$'), true]);
+                            Validation.creditCartTypes.set('hipercard', [new RegExp(/^(606282\d{10}(\d{3})?)|(3841\d{15})$/), new RegExp('^[0-9]{3}$'), true]);
+                        </script>]]>
+                    </text>
+                </action>
+            </block>
+        </reference>
+    </opc_index_index>
+
+    <checkout_multishipping_billing>
+        <reference name="head">
+            <!--<action method="addJs">
+                <script>mozg_cielo/payment/cc.js</script>
+                <params><![CDATA[name=""]]></params>
+            </action>-->
+            <action method="addCss">
+                <stylesheet>css/mozg_cielo/style.css</stylesheet>
+            </action>
+        </reference>
+    </checkout_multishipping_billing>
+
+    <checkout_onepage_success>
+        <reference name="content">
+            <block type="mozg_cielo/checkout_success" name="mozg.cielo.checkout.success" template="mozg_cielo/checkout/success.phtml"/>
+        </reference>
+    </checkout_onepage_success>
+
+    <checkout_multishipping_success translate="label">
+    	<reference name="content">
+            <block type="mozg_cielo/checkout_success" name="mozg.checkout.success" template="mozg_cielo/checkout/success.phtml"/>
+        </reference>
+    </checkout_multishipping_success>
+
+
+</layout>

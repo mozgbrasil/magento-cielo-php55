@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php
+/**
+ * @see Mozg_Cielo_Block_Adminhtml_System_Config_testWebserverConfiguration
+ */
+?>
+<div class="pp-buttons-container">
+    <button id="validate-webserver-configuration-<?php echo $this->getModus(); ?>">
+        <span><span><span><?php echo $this->escapeHtml($this->getButtonLabel()); ?></span></span></span>
+    </button>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+    $('validate-webserver-configuration-<?php echo $this->getModus(); ?>').observe('click', function(event) {
+
+        var baseUrl = "<?php echo $this->getUrlWebserverValidation(); ?>";
+
+        if('<?php echo $this->getModus(); ?>' == 'test') {
+            var username = $('payment_mozg_cielo_required_settings_ws_username_test').value;
+            var password = $('payment_mozg_cielo_required_settings_ws_password_test').value;
+        } else {
+            var username = $('payment_mozg_cielo_required_settings_ws_username_live').value;
+            var password = $('payment_mozg_cielo_required_settings_ws_password_live').value;
+        }
+
+        var request = new Ajax.Request(baseUrl, {
+            method: 'POST',
+            parameters: {
+                username: username,
+                password: password,
+                modus: '<?php echo $this->getModus(); ?>',
+                website: '<?php echo $this->getWebsite(); ?>',
+                store: '<?php echo $this->getStore(); ?>'
+            },
+            timeout: 2000,
+            onSuccess: function(response) { if (response.responseText) { alert("<?php echo Mage::helper('adminhtml')->__('successful'); ?>") } else { alert("<?php echo Mage::helper('adminhtml')->__('failed'); ?>") } }
+        });
+
+        event.preventDefault();
+    });
+    //]]>
+</script>

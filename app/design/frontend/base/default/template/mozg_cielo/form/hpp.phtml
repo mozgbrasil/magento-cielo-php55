@@ -1,0 +1,17 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php $_code = $this->getMethodCode() ?>
+<?php $disabled = $this->getHppOptionsDisabled();?>
+<?php if ($disabled): ?>
+    <fieldset class="form-list">
+        <ul id="payment_form_<?php echo $_code ?>" style="display:none">
+            <li>
+                <?php echo $this->__('You will be redirected to Mozg website when you place an order.') ?>
+            </li>
+        </ul>
+    </fieldset>
+<?php endif; ?>

@@ -1,0 +1,1328 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <mozg_cielo_abstract translate="label" module="mozg_cielo">
+                    <label>Cielo Default Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2000</sort_order>
+                    <frontend_class>complex</frontend_class>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <frontend_model>mozg_cielo/adminhtml_system_config_fieldset_method</frontend_model>
+                    <fields>
+                        <mozg_cielo_required_settings type="group" translate="label comment tooltip" module="mozg_cielo">
+                            <label>Required Settings</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>5</sort_order>
+                            <frontend_model>mozg_base/adminhtml_system_config_fieldset_expanded</frontend_model>
+                            <fields>
+                                <license translate="label">
+                                    <label>Licença para uso comercial</label>
+                                    <comment></comment>
+                                    <frontend_type>textarea</frontend_type>
+                                    <sort_order>8</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </license>
+                                <license_output translate="label">
+                                    <label></label>
+                                    <comment></comment>
+                                    <license_config_path>payment/mozg_cielo_required_settings/license</license_config_path>
+                                    <method_id>mozg_cielo</method_id>
+                                    <frontend_type>text</frontend_type>
+                                    <frontend_model>mozg_base/adminhtml_system_config_form_field_license</frontend_model>
+                                    <sort_order>9</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </license_output>
+                                <demoMode translate="label">
+                                    <label>Test/Production Mode</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-modo-teste-ou-produção" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/demoMode</config_path>
+                                    <source_model>mozg_cielo/source_DemoModes</source_model>
+                                    <sort_order>10</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </demoMode>
+                                <MerchantId_test translate="label comment tooltip">
+                                    <label>Merchant ID Test Cielo API</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-merchant-id-para-o-ambiente-de-teste" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>obscure</frontend_type>
+                                    <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                                    <config_path>payment/mozg_cielo_abstract/MerchantId_test</config_path>
+                                    <sort_order>20</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </MerchantId_test>
+                                <MerchantKey_test translate="label comment tooltip">
+                                    <label>Merchant Key Test Cielo API</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-merchant-key-ambiente-de-teste" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>obscure</frontend_type>
+                                    <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                                    <config_path>payment/mozg_cielo_abstract/MerchantKey_test</config_path>
+                                    <sort_order>30</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </MerchantKey_test>
+                                <MerchantId_live translate="label comment tooltip">
+                                    <label>Merchant ID Production Cielo API</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-merchant-id-para-o-ambiente-de-produção" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>obscure</frontend_type>
+                                    <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                                    <config_path>payment/mozg_cielo_abstract/MerchantId_live</config_path>
+                                    <sort_order>40</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </MerchantId_live>
+                                <MerchantKey_live translate="label comment tooltip">
+                                    <label>Merchant Key Production Cielo API</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-merchant-key-ambiente-de-produção" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>obscure</frontend_type>
+                                    <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                                    <config_path>payment/mozg_cielo_abstract/MerchantKey_live</config_path>
+                                    <sort_order>50</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </MerchantKey_live>
+                                <MerchantId_checkout translate="label comment tooltip">
+                                    <label>Merchant ID Checkout Cielo</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-merchant-key-ambiente-de-produção" target="_blank">__?__</a>]]></comment>
+                                    <tooltip></tooltip>
+                                    <comment><![CDATA[ ]]></comment>
+                                    <frontend_type>obscure</frontend_type>
+                                    <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                                    <config_path>payment/mozg_cielo_abstract/MerchantId_checkout</config_path>
+                                    <sort_order>60</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </MerchantId_checkout>
+                                <capture_mode translate="label">
+                                    <label>Capture Delay</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-tempo-de-captura" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>mozg_cielo/source_captureModes</source_model>
+                                    <config_path>payment/mozg_cielo_abstract/capture_mode</config_path>
+                                    <sort_order>130</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </capture_mode>
+                                <order_status translate="label">
+                                    <label>Order status: order creation</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-ordem-de-criação" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/order_status</config_path>
+                                    <source_model>adminhtml/system_config_source_order_status_new</source_model>
+                                    <sort_order>140</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </order_status>
+                                <payment_pre_authorized>
+                                    <label>Order status: payment authorisation</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-autorização-de-pagamento" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/payment_pre_authorized</config_path>
+                                    <source_model>adminhtml/system_config_source_order_status_newprocessing</source_model>
+                                    <sort_order>150</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </payment_pre_authorized>
+                                <payment_authorized translate="label">
+                                    <label>Order status: payment confirmed</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-pagamento-confirmado" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/payment_authorized</config_path>
+                                    <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                                    <sort_order>160</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </payment_authorized>
+                                <payment_cancelled translate="label">
+                                    <label>Order status: order cancellation</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-cancelamento-de-pedido" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/payment_cancelled</config_path>
+                                    <source_model>mozg_cielo/source_cancelModes</source_model>
+                                    <sort_order>170</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </payment_cancelled>
+                                <debug translate="label">
+                                    <label>Enable debug logging</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ativar-log-de-depuração" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/debug</config_path>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>180</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </debug>
+                            </fields>
+                        </mozg_cielo_required_settings>
+                        <mozg_cielo_order_process type="group" translate="label comment tooltip" module="mozg_cielo">
+                            <label>Advanced: Magento Order Processing</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>30</sort_order>
+                            <frontend_model>mozg_base/adminhtml_system_config_fieldset_expanded</frontend_model>
+                            <fields>
+                                <payment_authorized_virtual>
+                                    <label>Order status: payment capture (virtual products)</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-captura-de-pagamento-produtos-virtuais" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/payment_authorized_virtual</config_path>
+                                    <source_model>mozg_cielo/source_status_complete</source_model>
+                                    <sort_order>30</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </payment_authorized_virtual>
+                                <refund_authorized translate="label">
+                                    <label>Order status: Mozg Refunded</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-reembolsado" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/refund_authorized</config_path>
+                                    <source_model>mozg_cielo/source_status_refund</source_model>
+                                    <sort_order>40</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </refund_authorized>
+                                <refund_partial_authorized translate="label">
+                                    <label>Order status: Mozg partial Refunded</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-reembolsado-parcial" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/refund_partial_authorized</config_path>
+                                    <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                                    <sort_order>41</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </refund_partial_authorized>
+                                <pending_status>
+                                    <label>Order status: pending orders</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-pedidos-pendentes" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/pending_status</config_path>
+                                    <source_model>mozg_cielo/source_status_pending</source_model>
+                                    <sort_order>50</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </pending_status>
+                                <create_pending_invoice translate="label">
+                                    <label>Create a pending invoice (only for manual capture)</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-criar-uma-fatura-pendente-apenas-para-captura-manual" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>70</sort_order>
+                                    <config_path>payment/mozg_cielo_abstract/create_pending_invoice</config_path>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </create_pending_invoice>
+                                <capture_on_shipment>
+                                    <label>Order status: Capture on shipment</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-capturar-no-embarque" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <config_path>payment/mozg_cielo_abstract/capture_on_shipment</config_path>
+                                    <sort_order>80</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </capture_on_shipment>
+                                <uncancelorder translate="label">
+                                    <label>Enable Uncancel Order</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ativar-descancelar-pedido" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/uncancelorder</config_path>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>90</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </uncancelorder>
+                                <autorefundoncancel translate="label">
+                                    <label>Automatic cancel\refund when a order is canceled</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-cancelamentoreembolso-automático-quando-o-pedido-é-cancelado" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/autorefundoncancel</config_path>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>100</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </autorefundoncancel>
+                                <send_invoice_update_mail translate="label">
+                                    <label>Invoice email</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-e-mail-da-fatura" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <config_path>payment/mozg_cielo_abstract/send_invoice_update_mail</config_path>
+                                    <sort_order>2000</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </send_invoice_update_mail>
+                                <send_update_mail translate="label">
+                                    <label>Customers receive order status update email (deprecated).</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-os-clientes-recebem-e-mail-de-atualização-de-status-de-pedido" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <config_path>payment/mozg_cielo_abstract/send_update_mail</config_path>
+                                    <sort_order>1200</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </send_update_mail>
+                            </fields>
+                        </mozg_cielo_order_process>
+                        <mozg_cielo_order_notifications type="group" translate="label comment tooltip" module="mozg_cielo">
+                            <label>Advanced: Mozg Cielo Notifications</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>40</sort_order>
+                            <frontend_model>mozg_base/adminhtml_system_config_fieldset_expanded</frontend_model>
+                            <fields>
+                                <ignore_refund_notification>
+                                    <label>Ignore refund notification</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ignorar-notificação-de-reembolso" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>230</sort_order>
+                                    <config_path>payment/mozg_cielo_abstract/ignore_refund_notification</config_path>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </ignore_refund_notification>
+                            </fields>
+                        </mozg_cielo_order_notifications>
+                        <!--<mozg_cielo_billing_agreements type="group" translate="label comment tooltip" module="mozg_cielo">
+                            <label>Advanced: Billing Agreements</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <sort_order>50</sort_order>
+                            <frontend_model>mozg_base/adminhtml_system_config_fieldset_expanded</frontend_model>
+                            <comment><![CDATA[<p><strong>ONECLICK</strong>: The shopper opts in to storing their card details for future use. The shopper is present for the subsequent transaction, for cards the security code (CVC/CVV) is required.</p><p><strong>RECURRING*</strong>: Payment details are stored for future use. For cards, the security code (CVC/CVV) is not required for subsequent payments.</p><p><strong>ONECLICK, RECURRING*</strong>: Payment details are stored for future use. This allows the use of the stored payment details regardless of whether the shopper is on your site or not.</p>]]></comment>
+                            <fields>
+                                <recurringtypes translate="label">
+                                    <label>Agreement Type</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>mozg_cielo/source_recurringType</source_model>
+                                    <config_path>payment/mozg_cielo_abstract/recurringtypes</config_path>
+                                    <sort_order>79</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <tooltip>When enabled, users can save their Credit Cards and their SEPA authorizations. ONECLICK will require the input of the CVC for subsequent payments, while RECURRING does not.</tooltip>
+                                </recurringtypes>
+                            </fields>
+                        </mozg_cielo_billing_agreements>-->
+                        <mozg_cielo_checkout_experience type="group" translate="label comment tooltip" module="mozg_cielo">
+                            <label>Advanced: Checkout Experience</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>220</sort_order>
+                            <frontend_model>mozg_base/adminhtml_system_config_fieldset_expanded</frontend_model>
+                            <fields>
+                                <payment_cancelled_redirect>
+                                    <label>Redirect destination after cancellation</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-redirecionar-o-destino-após-o-cancelamento" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>mozg_cielo/source_cancelRedirect</source_model>
+                                    <config_path>payment/mozg_cielo_abstract/payment_cancelled_redirect</config_path>
+                                    <sort_order>10</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </payment_cancelled_redirect>
+                                <title_renderer>
+                                    <label>Payment method render method</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-método-de-pagamento-método-de-renderização" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>mozg_cielo/source_rendermode</source_model>
+                                    <config_path>payment/mozg_cielo_abstract/title_renderer</config_path>
+                                    <sort_order>20</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </title_renderer>
+                                <shopperlocale translate="label">
+                                    <label>Language locale (optional)</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-idioma-local-opcional" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>text</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/shopperlocale</config_path>
+                                    <sort_order>180</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </shopperlocale>
+                                <countryCode translate="label">
+                                    <label>ISO Country Code (optional)</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-código-do-país-iso-opcional" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>text</frontend_type>
+                                    <config_path>payment/mozg_cielo_abstract/countryCode</config_path>
+                                    <sort_order>190</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </countryCode>
+                            </fields>
+                        </mozg_cielo_checkout_experience>
+                        <mozg_cielo_manual_review type="group" translate="label comment tooltip" module="mozg_cielo">
+                            <label>Advanced: Manual Review</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>300</sort_order>
+                            <frontend_model>mozg_base/adminhtml_system_config_fieldset_expanded</frontend_model>
+                            <comment><![CDATA[<p>Mozg's Risk analysis tool allows merchants to configure when a transaction should be rejected or accepted depending on certain characteristics of the payment. This process has always had two automatic outcomes, either accept or reject the payment. Now, Mozg's risk system can tell merchants when a transaction seems to be risky but without rejecting it, and requires to be manually reviewed in order to decide if it should be accepted or rejected.</p>]]></comment>
+                            <fields>
+                                <fraud_manual_review_status>
+                                    <label>Manual Review Status</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-da-revisão-manual" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>mozg_cielo/source_status_pending</source_model>
+                                    <config_path>payment/mozg_cielo_abstract/fraud_manual_review_status</config_path>
+                                    <sort_order>10</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </fraud_manual_review_status>
+                                <fraud_manual_review_accept_status>
+                                    <label>Manual Review Accepted Status</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-revisão-manual-status-aceito" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                                    <config_path>payment/mozg_cielo_abstract/fraud_manual_review_accept_status</config_path>
+                                    <sort_order>20</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </fraud_manual_review_accept_status>
+                            </fields>
+                        </mozg_cielo_manual_review>
+                        <!--<mozg_cielo_split_payments type="group" translate="label comment tooltip" module="mozg_cielo">
+                            <label>Advanced: Split Payments</label>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>305</sort_order>
+                            <frontend_model>mozg_base/adminhtml_system_config_fieldset_expanded</frontend_model>
+                            <comment><![CDATA[<p>It is possible to do split payments with GiftCards please configure here what refund strategie you want to use</p>]]></comment>
+                            <fields>
+                                <split_payments_refund_strategy>
+                                    <label>Refund Strategy</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-estratégia-de-reembolso" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>mozg_cielo/source_SplitPaymentsRefundStrategies</source_model>
+                                    <config_path>payment/amozg_cielo_abstract/split_payments_refund_strategy</config_path>
+                                    <sort_order>20</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                </split_payments_refund_strategy>
+                            </fields>
+                        </mozg_cielo_split_payments>-->
+                    </fields>
+                </mozg_cielo_abstract>
+                <mozg_cielo_api_cc translate="label" module="mozg_cielo">
+                    <label>Cielo Credit Card</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2010</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <frontend_model>mozg_base/adminhtml_system_config_fieldset_method</frontend_model>
+                    <activity_path>payment/mozg_cielo_api_cc/active</activity_path>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ativar" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ordem-de-exibição" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <title translate="label">
+                            <label>Title</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-título" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-pagamentos-aplicáveis-aos-países" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>40</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from specific countries</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-pagamentos-específicos-aos-países" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>50</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><allowspecific>1</allowspecific></depends>
+                        </specificcountry>
+                        <heading_end translate="label">
+                            <label><![CDATA[<hr/>]]></label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_end>
+                        <cctypes translate="label">
+                            <label>Credit Card Types</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-tipos-de-cartão-de-crédito" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>mozg_cielo/source_ccType</source_model>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cctypes>
+                        <visible_type>
+                            <label>Visible in</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-visível-em" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mozg_cielo/source_VisibleType</source_model>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </visible_type>
+                        <mozg_cielo_api_cc_advanced type="group" translate="label" module="mozg_cielo">
+                            <label>Advanced Settings</label>
+                            <frontend_class>config-advanced</frontend_class>
+                            <frontend_model>mozg_base/adminhtml_system_config_fieldset_expanded</frontend_model>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>180</sort_order>
+                            <fields>
+                                <authenticate>
+                                    <label>Authenticate</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-autenticar" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <config_path>payment/mozg_cielo_api_cc/authenticate</config_path>
+                                    <sort_order>104</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </authenticate>
+                                <!--<enable_moto>
+                                    <label>Enable MOTO 'Mail Order / Telephone Order' for backend orders</label>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <config_path>payment/mozg_cielo_api_cc/enable_moto</config_path>
+                                    <sort_order>105</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </enable_moto>-->
+                                <enable_installments translate="label">
+                                    <label>Enable Installments</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ativar-parcelamentos" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <config_path>payment/mozg_cielo_api_cc/enable_installments</config_path>
+                                    <sort_order>110</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </enable_installments>
+                                <installments translate="label">
+                                    <label>Installments default</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-parcelas-padrão" target="_blank">__?__</a>]]></comment>
+                                    <frontend_model>mozg_cielo/adminhtml_form_field_installments</frontend_model>
+                                    <backend_model>mozg_cielo/system_config_backend_installments</backend_model>
+                                    <config_path>payment/mozg_cielo_api_cc/installments</config_path>
+                                    <sort_order>120</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                    <comments>This is the fallback if specific credit card type has no installments configured</comments>
+                                </installments>
+                                <installments_AE translate="label">
+                                    <label>Installments For American Express</label>
+                                    <frontend_model>mozg_cielo/adminhtml_form_field_installments</frontend_model>
+                                    <backend_model>mozg_cielo/system_config_backend_installments</backend_model>
+                                    <config_path>payment/mozg_cielo_api_cc/installments_AE</config_path>
+                                    <sort_order>130</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </installments_AE>
+                                <installments_VI translate="label">
+                                    <label>Installments For Visa</label>
+                                    <frontend_model>mozg_cielo/adminhtml_form_field_installments</frontend_model>
+                                    <backend_model>mozg_cielo/system_config_backend_installments</backend_model>
+                                    <config_path>payment/mozg_cielo_api_cc/installments_VI</config_path>
+                                    <sort_order>140</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </installments_VI>
+                                <installments_MC translate="label">
+                                    <label>Installments For Master Card</label>
+                                    <frontend_model>mozg_cielo/adminhtml_form_field_installments</frontend_model>
+                                    <backend_model>mozg_cielo/system_config_backend_installments</backend_model>
+                                    <config_path>payment/mozg_cielo_api_cc/installments_MC</config_path>
+                                    <sort_order>150</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </installments_MC>
+                                <installments_DI translate="label">
+                                    <label>Installments For Discover</label>
+                                    <frontend_model>mozg_cielo/adminhtml_form_field_installments</frontend_model>
+                                    <backend_model>mozg_cielo/system_config_backend_installments</backend_model>
+                                    <config_path>payment/mozg_cielo_api_cc/installments_DI</config_path>
+                                    <sort_order>160</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </installments_DI>
+                                <installments_DC translate="label">
+                                    <label>Installments For Diners Club</label>
+                                    <frontend_model>mozg_cielo/adminhtml_form_field_installments</frontend_model>
+                                    <backend_model>mozg_cielo/system_config_backend_installments</backend_model>
+                                    <config_path>payment/mozg_cielo_api_cc/installments_DC</config_path>
+                                    <sort_order>170</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </installments_DC>
+                                <installments_JCB translate="label">
+                                    <label>Installments For JCB</label>
+                                    <frontend_model>mozg_cielo/adminhtml_form_field_installments</frontend_model>
+                                    <backend_model>mozg_cielo/system_config_backend_installments</backend_model>
+                                    <config_path>payment/mozg_cielo_api_cc/installments_JCB</config_path>
+                                    <sort_order>190</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </installments_JCB>
+                                <installments_ELO translate="label">
+                                    <label>Installments For Elo</label>
+                                    <frontend_model>mozg_cielo/adminhtml_form_field_installments</frontend_model>
+                                    <backend_model>mozg_cielo/system_config_backend_installments</backend_model>
+                                    <config_path>payment/mozg_cielo_api_cc/installments_ELO</config_path>
+                                    <sort_order>200</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </installments_ELO>
+                                <installments_hipercard translate="label">
+                                    <label>Installments For Hipercard</label>
+                                    <frontend_model>mozg_cielo/adminhtml_form_field_installments</frontend_model>
+                                    <backend_model>mozg_cielo/system_config_backend_installments</backend_model>
+                                    <config_path>payment/mozg_cielo_api_cc/installments_hipercard</config_path>
+                                    <sort_order>210</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </installments_hipercard>
+                                <disable_zero_total>
+                                    <label>Disable at zero grand total</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-desativar-em-total-geral-zero" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <config_path>payment/mozg_cielo_api_cc/disable_zero_total</config_path>
+                                    <sort_order>220</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </disable_zero_total>
+                            </fields>
+                        </mozg_cielo_api_cc_advanced>
+                    </fields>
+                </mozg_cielo_api_cc>
+                <mozg_cielo_api_dc translate="label" module="mozg_cielo">
+                    <label>Cielo Debit Card</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2020</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <frontend_model>mozg_base/adminhtml_system_config_fieldset_method</frontend_model>
+                    <activity_path>payment/mozg_cielo_api_dc/active</activity_path>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ativar-1" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ordem-de-exibição-1" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <title translate="label">
+                            <label>Title</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-título-1" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-pagamentos-aplicáveis-aos-países-1" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>40</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from specific countries</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-pagamentos-específicos-aos-países-1" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>50</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><allowspecific>1</allowspecific></depends>
+                        </specificcountry>
+                        <heading_end translate="label">
+                            <label><![CDATA[<hr/>]]></label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_end>
+                        <dctypes translate="label">
+                            <label>Debit Card Types</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-tipos-de-cartão-de-débito" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>mozg_cielo/source_dcType</source_model>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dctypes>
+                        <visible_type>
+                            <label>Visible in</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-visível-em-1" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mozg_cielo/source_VisibleType</source_model>
+                            <sort_order>170</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </visible_type>
+                        <mozg_cielo_api_dc_advanced type="group" translate="label" module="mozg_cielo">
+                            <label>Advanced Settings</label>
+                            <frontend_class>config-advanced</frontend_class>
+                            <frontend_model>mozg_base/adminhtml_system_config_fieldset_expanded</frontend_model>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>180</sort_order>
+                            <fields>
+                                <disable_zero_total>
+                                    <label>Disable at zero grand total</label>
+                                    <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-desativar-em-total-geral-zero-1" target="_blank">__?__</a>]]></comment>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <config_path>payment/mozg_cielo_api_dc/disable_zero_total</config_path>
+                                    <sort_order>220</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </disable_zero_total>
+                            </fields>
+                        </mozg_cielo_api_dc_advanced>
+                    </fields>
+                </mozg_cielo_api_dc>
+                <!--<mozg_cielo_api_oneclick>
+                    <label>Cielo OneClick - Requires Cielo Credit Card</label>
+                    <frontend_type>text</frontend_type>
+                    <comment><![CDATA[
+                                During checkout shoppers can choose to have their payment details remembered and stored for trusted websites in Mozg’s highly secure platform. Mozg takes care of this process for its customers. Shoppers can then select in the Magento checkout the saved card and checkout with ‘OneClick’.
+                                <br />
+                                <b>Make sure you have turned on RECURRING_CONTRACT notification on your merchantAccount. If you want to add this or if you are not sure, just send us an <a href="mailto:magento@mozg.com">email</a>.</b>
+                            ]]></comment>
+                    <sort_order>2030</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <frontend_model>mozg_base/adminhtml_system_config_fieldset_method</frontend_model>
+                    <activity_path>payment/mozg_cielo_api_oneclick/active</activity_path>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip>OneClick payments only work if you have Mozg Credit Card enabled</tooltip>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+            			    <tooltip>Set the sequence number of this payment method in the checkout. Payment methods with a higher sort order number will be displayed lower in the list.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <recurring_payment_type translate="label">
+                            <label>Agreement Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mozg_cielo/source_recurringPaymentType</source_model>
+                            <config_path>payment/mozg_cielo_api_oneclick/recurring_payment_type</config_path>
+                            <sort_order>79</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <tooltip>With ONECLICK the shopper needs to fill in their security code for credit cards. For RECURRING, this is not needed. If you want to use RECURRING make sure you have Agreement Type set to RECURRING or ONECLICK,RECURRING. In the Backend always recurring is used because OneClick could trigger 3D secure.</tooltip>
+                        </recurring_payment_type>
+                    </fields>
+                </mozg_cielo_api_oneclick>
+                <mozg_cielo_api_hpp translate="label" module="mozg_cielo">
+                    <label>Cielo HPP</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2040</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <frontend_model>mozg_base/adminhtml_system_config_fieldset_method</frontend_model>
+                    <activity_path>payment/mozg_cielo_api_hpp/active</activity_path>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+            			    <tooltip>Set the sequence number of this payment method in the checkout. Payment methods with a higher sort order number will be displayed lower in the list.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <mozg_cielo_api_hpp_advanced type="group" translate="label" module="mozg_cielo">
+                            <label>Advanced Settings</label>
+                            <frontend_class>config-advanced</frontend_class>
+                            <frontend_type>text</frontend_type>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>70</sort_order>
+                            <fields>
+                                <title translate="label">
+                                    <label>Title</label>
+                                    <frontend_type>text</frontend_type>
+                                    <config_path>payment/mozg_cielo_api_hpp/title</config_path>
+                                    <sort_order>20</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </title>
+                                <disable_hpptypes translate="label">
+                                    <label>Leave payment method selection on HPP</label>
+                                    <tooltip>If you set this to 'Yes', payment methods in the checkout won't be displayed and you will be redirected to the Mozg HPP to make the selection.</tooltip>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <config_path>payment/mozg_cielo_api_hpp/disable_hpptypes</config_path>
+                                    <sort_order>90</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </disable_hpptypes>
+                                <disable_zero_total>
+                                    <label>Disable at zero grand total</label>
+                                    <tooltip>Disable this payment method in the checkout when the grand total of the quote is 0.</tooltip>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <config_path>payment/mozg_cielo_api_hpp/disable_zero_total</config_path>
+                                    <sort_order>120</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                </disable_zero_total>
+                            </fields>
+                        </mozg_cielo_api_hpp_advanced>
+                    </fields>
+                </mozg_cielo_api_hpp>-->
+                <mozg_cielo_api_boleto translate="label" module="mozg_cielo">
+                    <label>Cielo Boleto</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2050</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <frontend_model>mozg_base/adminhtml_system_config_fieldset_method</frontend_model>
+                    <activity_path>payment/mozg_cielo_api_boleto/active</activity_path>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ativar-2" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ordem-de-exibição-2" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <title translate="label">
+                            <label>Title</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-título-2" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-pagamentos-aplicáveis-aos-países-2" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>40</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from specific countries</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-pagamentos-específicos-aos-países-2" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>50</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><allowspecific>1</allowspecific></depends>
+                        </specificcountry>
+                        <heading_end translate="label">
+                            <label><![CDATA[<hr/>]]></label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_end>
+                        <boletotypes translate="label">
+                            <label>Boleto Types</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-tipos-de-boleto" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>mozg_cielo/source_boletoType</source_model>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </boletotypes>
+                        <order_underpaid_status translate="label">
+                            <label>Order status underpaid</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-não-pago" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>230</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_underpaid_status>
+                        <order_overpaid_status translate="label">
+                            <label>Order status overpaid</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-pago-em-excesso" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>240</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_overpaid_status>
+                        <visible_type>
+                            <label>Visible in</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-visível-em-2" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mozg_cielo/source_VisibleType</source_model>
+                            <sort_order>250</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </visible_type>
+                    </fields>
+                </mozg_cielo_api_boleto>
+                <mozg_cielo_api_eletronictransfer translate="label" module="mozg_cielo">
+                    <label>Cielo EletronicTransfer</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2060</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <frontend_model>mozg_base/adminhtml_system_config_fieldset_method</frontend_model>
+                    <activity_path>payment/mozg_cielo_api_eletronictransfer/active</activity_path>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ativar-3" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ordem-de-exibição-3" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <title translate="label">
+                            <label>Title</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-título-3" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-pagamentos-aplicáveis-aos-países-3" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>40</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from specific countries</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-pagamentos-específicos-aos-países-3" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>50</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><allowspecific>1</allowspecific></depends>
+                        </specificcountry>
+                        <heading_end translate="label">
+                            <label><![CDATA[<hr/>]]></label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_end>
+                        <eletronictransfertypes translate="label">
+                            <label>EletronicTransfer Types</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-tipos-de-transferência-eletrônica" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>mozg_cielo/source_eletronictransferType</source_model>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </eletronictransfertypes>
+                        <order_underpaid_status translate="label">
+                            <label>Order status underpaid</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-não-pago-1" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>230</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_underpaid_status>
+                        <order_overpaid_status translate="label">
+                            <label>Order status overpaid</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-pago-em-excesso-1" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>240</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_overpaid_status>
+                        <visible_type>
+                            <label>Visible in</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-visível-em-3" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mozg_cielo/source_VisibleType</source_model>
+                            <sort_order>250</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </visible_type>
+                    </fields>
+                </mozg_cielo_api_eletronictransfer>
+                <!--<mozg_cielo_api_pay_by_mail translate="label" module="mozg_cielo">
+                    <label>Cielo Pay By Mail</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2070</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <frontend_model>mozg_base/adminhtml_system_config_fieldset_method</frontend_model>
+                    <activity_path>payment/mozg_cielo_api_pay_by_mail/active</activity_path>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+            			    <tooltip>Set the sequence number of this payment method in the checkout. Payment methods with a higher sort order number will be displayed lower in the list.</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <session_validity>
+                            <label>Session Validity</label>
+                            <tooltip>How many days do you want this payment page to be active</tooltip>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </session_validity>
+                        <visible_type>
+                            <label>Visible in</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mozg_cielo/source_VisibleType</source_model>
+                            <sort_order>70</sort_order>
+                            <tooltip>Where do you want to show this payment method in the backend of Magento or in the frontend for the shoppers</tooltip>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </visible_type>
+                    </fields>
+                </mozg_cielo_api_pay_by_mail>-->
+                <mozg_cielo_checkout_hpp translate="label" module="mozg_cielo">
+                    <label>Checkout Cielo</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2080</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <frontend_model>mozg_base/adminhtml_system_config_fieldset_method</frontend_model>
+                    <activity_path>payment/mozg_cielo_checkout_hpp/active</activity_path>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ativar-4" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ordem-de-exibição-4" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <title translate="label">
+                            <label>Title</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-título-4" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <allowspecific translate="label">
+                            <label>Payment from applicable countries</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-pagamentos-aplicáveis-aos-países-4" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>40</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from specific countries</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-pagamentos-específicos-aos-países-4" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>50</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><allowspecific>1</allowspecific></depends>
+                        </specificcountry>
+                        <heading_end translate="label">
+                            <label><![CDATA[<hr/>]]></label>
+                            <frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </heading_end>
+                        <soft_descriptor translate="label">
+                            <label>Nome que aparecerá na fatura</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-nome-que-aparecerá-na-fatura" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </soft_descriptor>
+                        <antifraude translate="label">
+                            <label>Ativar Antifraud</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-ativar-antifraud" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>220</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </antifraude>
+                        <order_underpaid_status translate="label">
+                            <label>Order status underpaid</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-não-pago-2" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>230</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_underpaid_status>
+                        <order_overpaid_status translate="label">
+                            <label>Order status overpaid</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-status-do-pedido-pago-em-excesso-2" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_processing</source_model>
+                            <sort_order>240</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_overpaid_status>
+                        <visible_type>
+                            <label>Visible in</label>
+                            <comment><![CDATA[<a href="https://github.com/mozgbrasil/magento-cielo-php55/blob/master/README.md#-visível-em-4" target="_blank">__?__</a>]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>mozg_cielo/source_VisibleType</source_model>
+                            <sort_order>250</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </visible_type>
+                    </fields>
+                </mozg_cielo_checkout_hpp>
+            </groups>
+        </payment>
+    </sections>
+</config>

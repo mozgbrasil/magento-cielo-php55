@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<layout>
+
+    <!-- adding sales mozg status column on sales grid -->
+    <!--<add_order_grid_column_handle>
+        <reference name="sales_order.grid">
+            <action method="addColumnAfter">
+                <columnId>mozg_event_code</columnId>
+                <arguments module="ordergrid" translate="header">
+                    <header>Mozg Status</header>
+                    <index>mozg_event_code</index>
+                    <filter_index>main_table.mozg_event_code</filter_index>
+                    <width>50px</width>
+                    <type>options</type>
+                    <filter>mozg_cielo/adminhtml_sales_order_filter_mozg</filter>
+                    <renderer>mozg_cielo/adminhtml_sales_order_renderer_mozg</renderer>
+                </arguments>
+                <after>status</after>
+            </action>
+        </reference>
+    </add_order_grid_column_handle>-->
+
+    <!-- order grid action -->
+    <adminhtml_sales_order_grid>
+    <!-- apply the layout handle defined above -->
+        <update handle="add_order_grid_column_handle" />
+    </adminhtml_sales_order_grid>
+
+    <!-- order grid view action -->
+    <adminhtml_sales_order_index>
+        <!-- apply the layout handle defined above -->
+        <update handle="add_order_grid_column_handle" />
+    </adminhtml_sales_order_index>
+
+    <adminhtml_mozg_cielo_event_queue_index>
+        <reference name="content">
+            <block type="mozg_cielo/adminhtml_mozg_cielo_event_queue" name="mozg.cielo.event.queue.grid.index"/>
+        </reference>
+    </adminhtml_mozg_cielo_event_queue_index>
+
+    <adminhtml_mozg_cielo_event_queue_grid>
+        <remove name="root"/>
+        <block type="mozg_cielo/adminhtml_mozg_cielo_event_queue_grid" name="mozg.cielo.event.queue.grid" output="toHtml"/>
+    </adminhtml_mozg_cielo_event_queue_grid>
+
+    <adminhtml_sales_order_create_index>
+        <reference name="head">
+            <action method="addJs">
+                <script>mozg_cielo/adminhtml/sales.js</script>
+                <params><![CDATA[name=""]]></params>
+            </action>
+        </reference>
+    </adminhtml_sales_order_create_index>
+
+</layout>

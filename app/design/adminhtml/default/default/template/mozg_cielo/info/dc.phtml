@@ -1,0 +1,67 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php
+$ownerInformation = $this->getInfo()->getCcOwner();
+$cseEnabled = empty($ownerInformation);
+echo $this->htmlEscape($this->getMethod()->getTitle());
+echo ($cseEnabled ? " (with Client-Side Encryption)" : "");
+?><br/>
+<?php if ($_info = $this->getInfo()): ?>
+    <?php if ($_info->getMozgPspReference() == ''): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Payment has not been processed yet.') ?> <br/>
+    <?php else :?>
+         <?php
+        $storeId = $this->getMethod()->getInfoInstance()->getOrder()->getStoreId();
+        if($this->getMethod()->getConfigDataDemoMode($storeId)): ?>
+
+        <?php else : ?>
+
+        <?php endif; ?>
+
+        <?php
+        $pspReference = $this->htmlEscape($_info->getMozgPspReference());
+        $url = Mage::helper('adminhtml')->getUrl('adminhtml/CieloConsulta/', array('pspReference' => $pspReference) );
+        ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Itáu PSP Reference: <a href="%s" target="_blank">%s</a>', $url, $pspReference) ?> <br/>
+
+    <?php endif;?>
+	<?php if (!$cseEnabled): ?>
+    <?php echo Mage::helper('mozg_cielo')->__('Name on the Card: %s', $this->htmlEscape($this->getInfo()->getCcOwner())) ?><br/>
+    <?php echo Mage::helper('mozg_cielo')->__('Credit Card Type: %s', $this->htmlEscape($this->getCcTypeName())) ?><br/>
+    <?php echo Mage::helper('mozg_cielo')->__('Credit Card Number: xxxx-%s', $this->htmlEscape($this->getInfo()->getCcLast4())) ?><br/>
+    <?php echo Mage::helper('mozg_cielo')->__('Expiration Date: %s/%s', $this->htmlEscape($this->getCcExpMonth()), $this->htmlEscape($this->getInfo()->getCcExpYear())) ?><br/>
+    <?php else : ?>
+        <?php if($this->getCcTypeName() != ""):?>
+            <?php echo Mage::helper('mozg_cielo')->__('Credit Card Type: %s', $this->htmlEscape($this->getCcTypeName())) ?><br/>
+        <?php endif; ?>
+        <?php if($this->getInfo()->getCcLast4() != ""):?>
+            <?php echo Mage::helper('mozg_cielo')->__('Credit Card Number: xxxx-%s', $this->htmlEscape($this->getInfo()->getCcLast4())) ?><br/>
+        <?php endif;?>
+    <?php endif;?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgAvsResult()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Avs result: %s', $this->htmlEscape($this->getInfo()->getMozgAvsResult())) ?><br/>
+    <?php endif; ?>
+
+    <?php if($this->htmlEscape($this->getInfo()->getMozgCvcResult()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Cvc result: %s', $this->htmlEscape($this->getInfo()->getMozgCvcResult())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgTotalFraudScore()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Total fraud score: %s', $this->htmlEscape($this->getInfo()->getMozgTotalFraudScore())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getAdditionalInformation('number_of_installments')) != "" && $this->htmlEscape($this->getInfo()->getAdditionalInformation('number_of_installments')) > 1): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Number of installments: %s', $this->htmlEscape($this->getInfo()->getAdditionalInformation('number_of_installments'))) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgRefusalReasonRaw()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Raw acquirer response: %s', $this->htmlEscape($this->getInfo()->getMozgRefusalReasonRaw())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgAuthCode()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Authorisation code: %s', $this->htmlEscape($this->getInfo()->getMozgAuthCode())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgAcquirerReference()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Acquirer reference: %s', $this->htmlEscape($this->getInfo()->getMozgAcquirerReference())) ?><br/>
+    <?php endif; ?>
+<?php endif;?>

@@ -1,0 +1,84 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php echo $this->htmlEscape($this->getMethod()->getTitle()) ?><br/>
+<?php if ($_info = $this->getInfo()): ?>
+    <?php if ($_info->getMozgPspReference() == ''): ?>        
+        <?php echo Mage::helper('mozg_cielo')->__('Payment has not been processed yet.') ?> <br/> 
+    <?php else :?>
+         <?php
+        $storeId = $this->getMethod()->getInfoInstance()->getOrder()->getStoreId();
+        if($this->getMethod()->getConfigDataDemoMode($storeId)): ?>
+
+        <?php else : ?>
+
+        <?php endif; ?>
+
+        <?php
+        $pspReference = $this->htmlEscape($_info->getMozgPspReference());
+        $url = Mage::helper('adminhtml')->getUrl('adminhtml/CieloConsulta/', array('pspReference' => $pspReference) );
+        ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Itáu PSP Reference: <a href="%s" target="_blank">%s</a>', $url, $pspReference) ?> <br/>
+
+    <?php endif;?>
+    <?php $paymentMethod = $_info->getCcType() ?>
+    <?php if (!empty($paymentMethod)): ?>
+        <?php echo $this->__('Payment Method: %s', $this->htmlEscape($paymentMethod)) ?><br/>
+    <?php endif; ?>
+    <?php if (strpos($_info->getCcType(), "ideal") !== false): ?>            
+        <?php $bankData = $_info->getPoNumber(); ?>
+        <?php if (!empty($bankData)) : ?>
+            <?php
+            // for older versions < 2.5.2
+            $id = explode(DS, $bankData);
+            $label = isset($id['1']) ? $id['1'] : "";
+
+            // older versions > 2.5.2
+            if($label == "") {
+                $label = $_info->getAdditionalInformation('hpp_type_bank_label');
+            }
+
+            ?>
+            <?php echo $this->__('Bank: %s', $this->htmlEscape($label)) ?><br/>
+        <?php endif; ?>            
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgTotalFraudScore()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Total fraud score: %s', $this->htmlEscape($this->getInfo()->getMozgTotalFraudScore())) ?><br/>
+    <?php endif; ?>
+    <?php if($_info->getMozgKlarnaNumber() != null && $_info->getMozgKlarnaNumber() != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Klarna reservation number: %s', $this->htmlEscape($_info->getMozgKlarnaNumber())) ?> <br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgRefusalReasonRaw()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Raw acquirer response: %s', $this->htmlEscape($this->getInfo()->getMozgRefusalReasonRaw())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgAuthCode()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Authorisation code: %s', $this->htmlEscape($this->getInfo()->getMozgAuthCode())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgAcquirerReference()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Acquirer reference: %s', $this->htmlEscape($this->getInfo()->getMozgAcquirerReference())) ?><br/>
+    <?php endif; ?>
+
+    <!-- show split paymetn -->
+    <?php if($this->getSplitPayments()): ?>
+        <table>
+            <tr>
+                <th>PspReference</th>
+                <th>Payment Method</th>
+                <th>Amount</th>
+                <th>Refunded</th>
+            </tr>
+        <?php foreach ($this->getSplitPayments() as $payment): ?>
+            <tr>
+                <td><?php echo $payment->getPspreference() ?></td>
+                <td><?php echo $payment->getPaymentMethod() ?></td>
+                <td><?php echo $payment->getAmount() ?></td>
+                <td><?php echo $payment->getTotalRefunded() ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </table>
+    <?php endif; ?>
+
+<?php endif; ?>
