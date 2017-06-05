@@ -1,0 +1,97 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/*dump($this->getData());
+dump(get_class_methods(get_class($this)));
+dump(get_class_vars(get_class($this)));*/
+
+?>
+
+<!-- <?php echo get_class($this) ?> -->
+
+<script type="text/javascript">
+console.log('<?php echo get_class($this) ?>');
+</script>
+
+<?php if ($this->isCurrentMethod()): ?>
+
+    <div class="cielo-checkout-onepage-success">
+
+        <?php if ($this->isBoletoPayment() || $this->isEletronicTransferPayment()): ?>
+            <div class="payment-url">
+                <?php echo Mage::helper('mozg_cielo')->__('<button id="cielo_transaction" type="submit" class="button" onclick="javascript:openPopupsMozg(\'%s\', \'WinXilinus\', \'Link\', \'Cielo\', \'cielo\');"><span><span>Click here to process transaction</span></span></button>', $this->getPaymentUrl()) ?>
+            </div>
+
+            <script type="text/javascript">
+
+            Event.observe (window, "load", function (event){
+                console.log('load');
+                console.log(event);
+                var target= 'target' in event ? event.target : event.srcElement;
+                console.log('clicked on '+target.tagName);
+
+                if($('cielo_transaction')){
+                    window.location.href = "#cielo_transaction";
+                    $('cielo_transaction').click();
+                }
+                
+            });
+
+            </script>
+        <?php endif; ?>
+
+        <?php /* ?>
+
+        <div id="ajax-mozg-success" style="border:1px solid red; display:none;">Aguarde o envio da notificação</div>
+
+        <script type="text/javascript">
+
+        pre.show('Processando...');
+
+        </script>
+
+        <script type="text/javascript">
+
+            var url = '<?php echo $this->getPaymentNotificationUrl(); ?>';
+
+            var element = 'ajax-mozg-success';
+
+            var req = new Ajax.Request( url, {
+                method: 'get',
+                asynchronous: false,
+                onLoading: function(transport) {
+                    console.log('onLoading');
+                },
+                onCreate: function(transport) {
+                    console.log('onCreate');            
+                },
+                onComplete: function(transport) {
+                    console.log('onComplete');
+                    
+                    //console.dir(transport);
+
+                    console.log('pre');
+
+                    console.log(pre);
+
+                    pre.hide();
+
+                    $(element).innerHTML = transport.responseText;
+                    
+                }
+            });
+
+            console.log(req);
+
+        </script>
+
+        <?php */ ?>
+
+    </div>
+
+<?php endif; ?>
+
+<!-- / <?php echo get_class($this) ?> -->

@@ -1,0 +1,108 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php
+//dump(get_class_methods(get_class($this)));
+//dump(get_class_methods(get_class($this->getMethod())));
+?>
+<?php
+$ownerInformation = $this->getInfo()->getCcOwner();
+echo $this->htmlEscape($this->getMethod()->getTitle());
+?><br/>
+<?php if ($_info = $this->getInfo()): ?>
+    <?php if ($_info->getMozgPspReference() == ''): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Payment has not been processed yet.') ?> <br/>
+    <?php else :?>
+
+        <?php 
+
+        $storeId = $this->getMethod()->getInfoInstance()->getOrder()->getStoreId();
+
+        //
+
+        $pspReference = $this->htmlEscape($_info->getMozgPspReference());
+        $url = Mage::helper('adminhtml')->getUrl('adminhtml/Cielo/consulta/', array('pspReference' => $pspReference) );
+        $link = "javascript:openPopupsMozg('$url', 'WinXilinus', 'Link', 'Cielo', 'cielo');";
+
+        echo Mage::helper('mozg_cielo')->__('Cielo PSP Reference: <a href="%s">%s</a>', $link, $pspReference) . ' <br/>';
+
+        //
+
+        $_service = Mage::helper('mozg_cielo/service')->_initService($storeId);
+        $response_transaction = $_service->get($pspReference);
+
+        if(array_key_exists('Payment', $response_transaction)){
+
+            $status = $response_transaction['Payment']['Status'];
+            $_cielo_status = [
+                '0'=>'NotFinished',
+                '1'=>'Authorized',
+                '2'=>'PaymentConfirmed',
+                '3'=>'Denied',
+                '10'=>'Voided',
+                '11'=>'Refunded',
+                '12'=>'Pending',
+                '13'=>'Aborted',
+                '20'=>'Scheduled',
+            ];
+            $color = ($status == '2') ? 'green' : 'red';
+
+            $cielo_status = Mage::helper('mozg_cielo')->__($_cielo_status[$status]);
+            
+            $authResult = '<font color="'.$color.'"><b>' . $cielo_status . '</b></font>';
+
+            echo Mage::helper('mozg_cielo')->__('Status da Transação: %s', $authResult) . ' <br/>';
+
+        } else {
+
+            echo Mage::helper('mozg_cielo')->__('Erro na consulta:: %s', $response_transaction['message']) . ' <br/>';
+
+        }     
+
+        //
+
+        $order = $this->getMethod()->getInfoInstance()->getOrder();
+
+        $realOrderId = $order->getRealOrderId();
+        $incrementId = $order->getIncrementId();
+
+        $url = Mage::helper('adminhtml')->getUrl('adminhtml/Cielo/captura/', array('OrderId' => $realOrderId) );
+        $link = "javascript:openPopupsMozg('$url', 'WinXilinus', 'Link', 'Cielo', 'cielo');";
+
+        //echo Mage::helper('mozg_cielo')->__('fazer algo') . ' <br/>';
+        
+        ?>
+
+    <?php endif;?>
+
+    <?php echo Mage::helper('mozg_cielo')->__('Name on the Card: %s', $this->htmlEscape($this->getInfo()->getCcOwner())) ?><br/>
+    <?php echo Mage::helper('mozg_cielo')->__('Credit Card Type: %s', $this->htmlEscape($this->getCcTypeName())) ?><br/>
+    <?php echo Mage::helper('mozg_cielo')->__('Credit Card Number: xxxx-%s', $this->htmlEscape($this->getInfo()->getCcLast4())) ?><br/>
+    <?php echo Mage::helper('mozg_cielo')->__('Expiration Date: %s/%s', $this->htmlEscape($this->getCcExpMonth()), $this->htmlEscape($this->getInfo()->getCcExpYear())) ?><br/>
+
+    <?php if($this->htmlEscape($this->getInfo()->getMozgAvsResult()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Avs result: %s', $this->htmlEscape($this->getInfo()->getMozgAvsResult())) ?><br/>
+    <?php endif; ?>
+
+    <?php if($this->htmlEscape($this->getInfo()->getMozgCvcResult()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Cvc result: %s', $this->htmlEscape($this->getInfo()->getMozgCvcResult())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgTotalFraudScore()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Total fraud score: %s', $this->htmlEscape($this->getInfo()->getMozgTotalFraudScore())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getAdditionalInformation('number_of_installments')) != "" && $this->htmlEscape($this->getInfo()->getAdditionalInformation('number_of_installments')) > 1): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Number of installments: %s', $this->htmlEscape($this->getInfo()->getAdditionalInformation('number_of_installments'))) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgRefusalReasonRaw()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Raw acquirer response: %s', $this->htmlEscape($this->getInfo()->getMozgRefusalReasonRaw())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgAuthCode()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Authorisation code: %s', $this->htmlEscape($this->getInfo()->getMozgAuthCode())) ?><br/>
+    <?php endif; ?>
+    <?php if($this->htmlEscape($this->getInfo()->getMozgAcquirerReference()) != ""): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Acquirer reference: %s', $this->htmlEscape($this->getInfo()->getMozgAcquirerReference())) ?><br/>
+    <?php endif; ?>
+<?php endif;?>

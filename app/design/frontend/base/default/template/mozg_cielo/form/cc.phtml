@@ -1,0 +1,446 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php
+/** @var Mozg_Cielo_Block_Form_Cc $this */
+$_code = $this->getMethodCode();
+?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">
+    <li class="mozg_cielo_creditcard_labels">
+        <?php $count = 0;
+        foreach ($this->getCcAvailableTypes() as $_typeCode => $_typeName): ?>
+            <?php $_filename = $this->getSkinUrl('images/mozg_cielo/' . strtolower($_typeCode) . '_small.png'); ?>
+            <img id="<?php echo $_code ?>_cc_type_<?php echo $count; ?>" width="40" height="22" src="<?php echo $_filename; ?>" alt="" class="mid" />
+            <?php ++$count;
+        endforeach; ?>
+        <input type="hidden" id="<?php echo $_code ?>_cc_type" name="payment[cc_type]" value=""/>
+    </li>
+    <li class="mozg_cielo_input_fields mozg_cielo_input_fields_cc_number">
+        <label for="<?php echo $_code ?>_cc_number" class="required"><em>*</em><?php echo $this->__('Credit Card Number') ?></label>
+        <div class="input-box">
+            <input type="text" pattern="[0-9]*" id="<?php echo $_code ?>_cc_number" <?php echo "name=\"payment[cc_number]\""; ?> title="<?php echo $this->__('Credit Card Number') ?>" class="input-text validate-cc-type required-entry" value="" maxlength="23" onkeydown="return denyNotNumber(this, event);" autocomplete="off" onpaste="return false;" />
+        </div>
+    </li>
+    <li class="mozg_cielo_input_fields mozg_cielo_input_fields_cc_name">
+        <label for="<?php echo $_code ?>_cc_owner" class="required"><em>*</em><?php echo $this->__('Name on Card') ?></label>
+        <div class="input-box">
+            <input type="text" title="<?php echo $this->__('Name on Card') ?>" class="input-text required-entry" id="<?php echo $_code ?>_cc_owner" <?php echo "name=\"payment[cc_owner]\""; ?> value="<?php echo $this->htmlEscape($this->getInfoData('cc_owner')) ?>" maxlength="100" />
+        </div>
+    </li>
+    <li class="mozg_cielo_input_fields mozg_cielo_input_fields_expiry">
+        <label for="<?php echo $_code ?>_expiration" class="required"><em>*</em><?php echo $this->__('Expiration Date') ?></label>
+        <div class="input-box">
+            <div class="v-fix mozg_expiry_month">
+                <select id="<?php echo $_code ?>_expiration" <?php echo "name=\"payment[cc_exp_month]\""; ?> class="month validate-cc-exp required-entry">
+                    <?php $_ccExpMonth = $this->getInfoData('cc_exp_month') ?>
+                    <?php foreach ($this->getCcMonths() as $k=>$v): ?>
+                        <option value="<?php echo $k?$k:'' ?>"<?php if($k==$_ccExpMonth): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <div class="v-fix mozg_expiry_year">
+                <?php $_ccExpYear = $this->getInfoData('cc_exp_year') ?>
+                <select id="<?php echo $_code ?>_expiration_yr" <?php echo "name=\"payment[cc_exp_year]\""; ?> class="year required-entry">
+                    <?php foreach ($this->getCcYears() as $k=>$v): ?>
+                        <option value="<?php echo $k?$k:'' ?>"<?php if($k==$_ccExpYear): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+    </li>
+    <?php echo $this->getChildHtml() ?>
+
+    <?php if($this->hasVerification()): ?>
+    <li class="mozg_cielo_input_fields mozg_cielo_input_fields_cc_verify">
+        <label id="<?php echo $_code ?>_cc_cid_label" for="<?php echo $_code ?>_cc_cid" class="required"><em id="<?php echo $_code ?>_cc_cid_label_em">*</em><?php echo $this->__('Card Verification Number') ?></label>
+        <div class="input-box">
+            <div class="v-fix">
+                <input type="text" pattern="[0-9]{3,}" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv required-entry validate-digits validate-length" id="<?php echo $_code ?>_cc_cid" <?php echo "name=\"payment[cc_cid]\""; ?> value="" size="7" maxlength="4" onkeydown="return denyNotNumber(this, event);" autocomplete="off" onpaste="return false;" />
+            </div>
+            <a href="#" class="cvv-what-is-this"><?php echo $this->__('What is this?') ?></a>
+        </div>
+    </li>
+    <?php endif; ?>
+    <?php if($this->hasInstallments()): ?>
+    <li class="mozg_cielo_input_fields mozg_cielo_input_fields_cc_installments">
+        <label for="<?php echo $_code ?>_installments" class="required"><em>*</em><?php echo $this->__('Installments') ?></label>
+        <div class="input-box">
+            <div class="v-fix">
+                <select id="<?php echo $_code ?>_installments" name="payment[additional_data]" class="number required-entry">
+                    <?php foreach ($this->getPossibleInstallments() as $k=>$v): ?>
+                        <option value="<?php echo $k?$k:'' ?>"><?php echo $v ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+        </div>
+    </li>
+    <?php endif;?>
+
+    <?php if($this->canCreateBillingAgreement()): ?>
+    <li id="mozg-cielo-cc-remember-these-details" class="mozg_cielo_input_fields">
+        <div class="input-box">
+            <div class="v-fix">
+                <input type="checkbox" name="payment[store_cc]" id="<?php echo $_code ?>_store_cc" value="1" checked />
+                <label for="<?php echo $_code ?>_store_cc"><em>*</em><?php echo $this->__('Remember these details') ?></label>
+            </div>
+        </div>
+    </li>
+    <script type="text/javascript">
+        // don't show save cc for quest checkout. Only possible to detect with javascript
+        if ($('login:guest') && $('login:guest').checked) {
+            $('mozg-cielo-cc-remember-these-details').hide();
+        }
+    </script>
+    <?php endif; ?>
+
+    <script type="text/javascript">
+        var <?php echo $_code ?>_group_types = [];
+        <?php foreach ($this->getCcAvailableTypes() as $_typeCode => $_typeName): ?>
+        <?php echo $_code ?>_group_types.push("<?php echo $_typeCode; ?>");
+        <?php endforeach ?>
+
+        card_previousCardNumber = "";
+
+        function <?php echo $_code ?>_selectBrand() {
+
+            console.log(arguments.callee.name);
+            //console.dir(this);
+
+            cardNumber = (document.getElementById( '<?php echo $_code ?>_cc_number' ).value);
+            dontHideErrorFrame = null;
+
+            //console.log(cardNumber);
+            //console.log(cardNumber.length);
+
+            // empty card field - reset all
+            if (cardNumber.length == 0) {
+                card_previousCardNumber = cardNumber;
+                <?php echo $_code ?>_cardSetCardBrand(null, false, <?php echo $_code ?>_group_types);
+                return;
+            }
+
+            // When editing the card (but not adding digits at the end), don't reformat the number
+            var l=0;
+            while(l < card_previousCardNumber.length && l < cardNumber.length) {
+                if(cardNumber[l] != card_previousCardNumber[l]) {
+                    card_previousCardNumber = cardNumber;
+                    return;
+                }
+                l++;
+            }
+
+            // remove all whitespace
+            reg = /\s+/g;
+            cardNumber = cardNumber.replace(reg,'');
+
+            //console.log(cardNumber);
+
+            nrOfDigits = cardNumber.length;
+            if(nrOfDigits > 19){
+                return;
+            }
+
+            //
+
+            // https://www.npmjs.com/package/creditcard-info
+
+            var creditcardInfo = require('creditcard-info');
+
+            var brand = creditcardInfo(cardNumber).getBrand();
+
+            console.log(brand);
+
+            var myObject_CardType = {};
+            myObject_CardType['visa'] = "VI";
+            myObject_CardType['mastercard'] = "MC";
+            myObject_CardType['amex'] = "AE";
+            myObject_CardType['dinersclub'] = "DC";
+            myObject_CardType['discover'] = "DI";
+            myObject_CardType['jcb'] = "JCB";
+            myObject_CardType['elo'] = "ELO";
+            myObject_CardType['hipercard'] = "hipercard";
+            myObject_CardType['aura'] = "AU";
+            myObject_CardType['visaelectron'] = "VI";
+            myObject_CardType['maestro'] = "SM";
+
+            console.log(myObject_CardType);
+
+            var cardtype = myObject_CardType[brand];
+
+            console.log(cardtype);
+
+            //
+
+            //baseCard = getBaseCard(cardNumber, <?php echo $_code ?>_group_types);
+
+            console.log(<?php echo $_code ?>_group_types);
+
+            if(cardtype != null) {
+                <?php echo $_code ?>_cardSetCardBrand(cardtype, true, <?php echo $_code ?>_group_types);
+            } else if(nrOfDigits > 4) {
+                <?php echo $_code ?>_cardSetCardBrand(null, true, <?php echo $_code ?>_group_types);
+            } else {
+                <?php echo $_code ?>_cardSetCardBrand(null, false, <?php echo $_code ?>_group_types);
+            }
+
+            //show value with white space after four numbers
+            result = cardNumber.replace(/(\d{4})/g, '$1 ');
+            result = result.replace(/\s+$/, ''); //remove trailing spaces
+            card_previousCardNumber = result;
+            document.getElementById( '<?php echo $_code; ?>_cc_number' ).value = result;
+
+            //console.log(result);
+        }
+
+        function <?php echo $_code ?>_cardSetCardBrand(cardtype, greyInactive, <?php echo $_code ?>_group_types) {
+
+            console.log(arguments.callee.name);
+
+            console.log(cardtype);
+            console.log(greyInactive);
+            console.log(<?php echo $_code ?>_group_types);
+
+            for(var i = 0; i < <?php echo $_code ?>_group_types.length; ++i) {
+                var imageId =  '<?php echo $_code ?>_cc_type_'  + i;
+                if(cardtype != null && <?php echo $_code ?>_group_types[i] == cardtype) {
+                    // remove class
+                    $(imageId).removeClassName('grey');
+                    // set hidden field cc type for installments
+                    $('<?php echo $_code ?>_cc_type').setValue(cardtype);
+                } else {
+                    if(greyInactive) {
+                        // add class
+                        $(imageId).addClassName('grey');
+                    } else {
+                        // remove class
+                        $(imageId).removeClassName('grey');
+                    }
+                }
+                document.getElementById(imageId).style.display="inline";
+            }
+
+            <?php if($this->hasInstallments()): ?>
+            if(cardtype != null ) {
+                var interval = setInterval(<?php echo $_code ?>_getInstallments(cardtype), 500);
+            }
+            <?php endif; ?>
+
+            <?php echo $_code ?>_cardSetCvcElementselectedCardType(cardtype != null ? cardtype : null);
+
+            <?php echo $_code ?>_cardSetCVCRequired(cardtype != null ? cardtype : null);
+        }
+
+        function <?php echo $_code ?>_cardSetCvcElementselectedCardType(selectedCardType) {
+
+            console.log(arguments.callee.name);
+
+            var cvcCodeElem = document.getElementById( '<?php echo $_code; ?>_cc_cid' );
+
+            // first remove classnames
+            if(cvcCodeElem != null) {
+                cvcCodeElem.removeClassName('maximum-length-3');
+                cvcCodeElem.removeClassName('minimum-length-3');
+                cvcCodeElem.removeClassName('maximum-length-4');
+                cvcCodeElem.removeClassName('minimum-length-4');
+            }
+
+            if(selectedCardType == null) {
+                // error do nothing
+            } else if(selectedCardType == "AE") {
+                cvcCodeElem.maxLength = 4;
+                cvcCodeElem.addClassName('maximum-length-4');
+                cvcCodeElem.addClassName('minimum-length-4');
+            } else {
+                cvcCodeElem.maxLength = 3;
+                cvcCodeElem.addClassName('maximum-length-3');
+                cvcCodeElem.addClassName('minimum-length-3');
+            }
+        }
+
+        function <?php echo $_code ?>_cardSetCVCRequired(selectedCardType) {
+
+            console.log(arguments.callee.name);
+            
+            <?php if($this->hasVerification()): ?>
+                var cvcCodeElem = document.getElementById( '<?php echo $_code; ?>_cc_cid');
+                var cvcCodeElemLabel = document.getElementById( '<?php echo $_code; ?>_cc_cid_label');
+                var cvcCodeElemLabelEm = document.getElementById( '<?php echo $_code; ?>_cc_cid_label_em');
+            
+                if(selectedCardType != null && selectedCardType == "SM") {
+                    // cvc not required
+                    cvcCodeElem.removeClassName('required-entry');
+                    cvcCodeElemLabel.removeClassName('required');
+                    cvcCodeElemLabelEm.hide();
+                } else {
+                    // cvc required
+                    cvcCodeElem.addClassName('required-entry');
+                    cvcCodeElemLabel.addClassName('required');
+                    cvcCodeElemLabelEm.show();
+                }
+            <?php endif; ?>
+        }
+
+
+        var ajaxReq;
+        function <?php echo $_code ?>_getInstallments(variant) {
+
+            console.log(arguments.callee.name);
+
+            // get the installments for this cardtype
+            var ccType = variant;
+
+            var url = '<?php echo $this->getUrl('mozg_cielo/GetInstallments', array('_secure'=>true)); ?>';
+
+            if(ajaxReq && ajaxReq.readystate != 4){
+                ajaxReq.transport.abort();
+            }
+
+            ajaxReq = new Ajax.Request(url, {
+                parameters: {ccType: ccType, isAjax: 1, method: 'POST'},
+                onSuccess: function(transport) {
+
+                    if(transport.status == 200) {
+
+                        // get current selected installment
+                        var currentSelectedInstallment = document.getElementById('<?php echo $_code ?>_installments').getValue();
+
+                        // clear the select box
+                        document.getElementById('<?php echo $_code ?>_installments').options.length = 0;
+
+                        var response = transport.responseText.evalJSON();
+
+                        var sel = false;
+                        for (var key in response) {
+
+                            // change the installments
+                            var opt = document.createElement('option');
+                            opt.text = response[key]
+                            opt.value = key;
+                            // check if selected installment is still available
+                            if(currentSelectedInstallment == key) {
+                                sel = true;
+                            }
+                            $('<?php echo $_code ?>_installments').options.add(opt);
+                        }
+
+                        if(sel == true && currentSelectedInstallment) {
+                            document.getElementById('<?php echo $_code ?>_installments').value=currentSelectedInstallment;
+                        }
+                    }
+                },
+                onFailure: function(){
+                    alert('<?php echo $this->jsQuoteEscape($this->__('Server Error. Please try again.')) ?>');
+                }
+            });
+        }
+
+        // default
+        window.addEventListener("load", function(){ 
+
+            //console.log('<?php echo $_code ?>.window.event.onload');
+            <?php echo $_code ?>_cardSetCardBrand(null, false, <?php echo $_code ?>_group_types);            
+
+         });
+
+        // observers
+        Event.observe($('<?php echo $_code ?>_cc_number'), 'change', <?php echo $_code ?>_selectBrand);
+        Event.observe($('<?php echo $_code ?>_cc_number'), 'keyup', <?php echo $_code ?>_selectBrand);
+
+    </script>
+
+    <script type="text/javascript">
+
+        // easter_egg
+
+        Event.observe($('<?php echo $_code ?>_cc_number'), 'dblclick', <?php echo $_code ?>_easter_egg);
+
+        function <?php echo $_code ?>_easter_egg(event){
+
+            console.log(arguments.callee.name);
+
+            //console.dir(event);
+
+            var element = event.element();
+
+            //console.log(event.shiftKey);
+
+            if(!event.shiftKey){
+                return false;
+            }
+
+            console.log($('<?php echo $_code ?>_cc_number'));
+
+
+            // NPM
+
+            // https://www.npmjs.com/package/random-item
+
+            var randomItem = require('random-item');
+             
+            var random_item = randomItem(['Visa', 'MasterCard', 'Amex', 'Diners', 'Discover', 'JCB']);
+
+            console.log(random_item);
+
+            // https://www.npmjs.com/package/creditcardgenerator
+
+            const creditcardgenerator = require('creditcardgenerator');
+
+            var creditcard_json = creditcardgenerator.create(random_item);
+
+            var random_creditcard = creditcard_json.number;
+
+            console.log(random_creditcard);
+
+            // https://www.npmjs.com/package/random-month
+
+            var randomMonth = require('random-month');
+
+            var random_month = randomMonth();
+
+            console.log(random_month);
+
+            // https://www.npmjs.com/package/random-year
+
+            var randomYear = require('random-year');
+
+            var random_year = randomYear({ min: 2017, max: 2026 });
+
+            console.log(random_year);
+
+            // https://github.com/mock-end/random-natural
+
+            var randomNatural = require('random-natural');
+
+            var random_number = randomNatural({ min: 100, max: 999 });
+
+            console.log(random_number);
+
+            // https://www.npmjs.com/package/random-fullname
+
+            var randomFullName = require('random-fullname');             
+
+            var random_fullname = randomFullName();
+
+            console.log(random_fullname);
+
+            //
+
+            $('<?php echo $_code ?>_cc_number').value = random_creditcard;
+            $('<?php echo $_code ?>_cc_owner').value = random_fullname;
+            $('<?php echo $_code ?>_cc_cid').value = random_number;
+            $('<?php echo $_code ?>_expiration').value = random_month;
+            $('<?php echo $_code ?>_expiration_yr').value = random_year;
+
+            $('<?php echo $_code ?>_cc_number').triggerEvent('change');
+            $('<?php echo $_code ?>_cc_number').triggerEvent('keyup');
+
+        }
+
+        console.log('<?php echo $_code ?>');
+
+    </script>
+
+</ul>

@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<layout version="0.1.0">
+
+    <mozg_updatecart_index>
+        <update handle="checkout_cart_index" />
+    </mozg_updatecart_index>
+
+    <checkout_cart_index>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/mozg_cielo/style.css</stylesheet>
+            </action>
+        </reference>
+    </checkout_cart_index>
+
+    <checkout_onepage_index>
+        <reference name="head">
+            <!--<action method="addJs">
+                <script>mozg_cielo/payment/cc.js</script>
+                <params><![CDATA[name=""]]></params>
+            </action>-->
+            <action method="addCss">
+                <stylesheet>css/mozg_cielo/style.css</stylesheet>
+            </action>
+        </reference>
+    </checkout_onepage_index>
+
+    <!-- For the Idev onestepcheckout module !-->
+    <onestepcheckout_index_index>
+        <reference name="head">
+            <!--<action method="addJs">
+                <script>mozg_cielo/payment/cc.js</script>
+                <params><![CDATA[name=""]]></params>
+            </action>-->
+            <action method="addCss">
+                <stylesheet>css/mozg_cielo/style.css</stylesheet>
+            </action>
+        </reference>
+    </onestepcheckout_index_index>
+
+    <!-- For the IWD onestep checkout module !-->
+    <opc_index_index>
+        <reference name="head">
+            <!--<action method="addJs">
+                <script>mozg_cielo/payment/cc.js</script>
+                <params><![CDATA[name=""]]></params>
+            </action>-->
+            <action method="addCss">
+                <stylesheet>css/mozg_cielo/style.css</stylesheet>
+            </action>
+        </reference>
+    </opc_index_index>
+
+    <checkout_multishipping_billing>
+        <reference name="head">
+            <!--<action method="addJs">
+                <script>mozg_cielo/payment/cc.js</script>
+                <params><![CDATA[name=""]]></params>
+            </action>-->
+            <action method="addCss">
+                <stylesheet>css/mozg_cielo/style.css</stylesheet>
+            </action>
+        </reference>
+    </checkout_multishipping_billing>
+
+    <handle_mozg_cielo_checkout>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>css/mozg_cielo/style.css</stylesheet>
+            </action>
+        </reference>
+        <!--<reference name="checkout.success">
+            <block type="mozg_cielo/checkout_onepage_success" name="mozg.cielo.checkout.success" template="mozg_cielo/checkout/onepage/success.phtml"/>
+        </reference>-->
+    </handle_mozg_cielo_checkout>
+
+    <checkout_onepage_success translate="label">
+        <update handle="handle_mozg_cielo_checkout"/>
+    </checkout_onepage_success>
+
+    <checkout_multishipping_success translate="label">
+        <update handle="handle_mozg_cielo_checkout"/>
+    </checkout_multishipping_success>
+
+    <onestepcheckout_index_success translate="label">
+        <update handle="handle_mozg_cielo_checkout"/>
+    </onestepcheckout_index_success>
+
+</layout>

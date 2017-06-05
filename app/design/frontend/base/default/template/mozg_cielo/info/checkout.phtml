@@ -1,0 +1,20 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php echo $this->htmlEscape($this->getMethod()->getTitle()) ?><br/>
+<?php if ($_info = $this->getInfo()): ?>
+
+    <?php if ($_info->getMozgPspReference() == ''): ?>
+        <?php echo Mage::helper('mozg_cielo')->__('Payment has not been processed yet.') ?> <br/> 
+    <?php else :?>
+
+    <?php endif;?>
+
+    <?php if($_info->getOrder() != null): ?>
+    <?php echo Mage::helper('mozg_cielo')->__('Payment URL: <a target="_blank" href="%s">Download</a>', $this->getInfo()->getOrder()->getMozgPaymentUrl()) ?><br/>
+    <?php endif; ?>
+
+<?php endif;?>
