@@ -1,0 +1,11 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php echo $this->getMethod()->getTitle() ?>
+<?php if($this->hasInstallments()):?>
+{{pdf_row_separator}}
+<?php echo $this->__('Number of installments: %s',  $this->htmlEscape($this->getInfo()->getAdditionalInformation('number_of_installments')))."<br/>";
+endif;?>

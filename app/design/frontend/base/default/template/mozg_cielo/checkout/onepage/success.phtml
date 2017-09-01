@@ -1,0 +1,53 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/*
+dump($this->getData());
+dump(get_class($this));
+dump(get_class_methods(get_class($this)));
+dump(get_class_vars(get_class($this)));
+*/
+
+?>
+
+<!-- <?php echo get_class($this) ?> -->
+
+<script type="text/javascript">
+console.log('<?php echo get_class($this) ?>');
+</script>
+
+<?php if ($this->isCurrentMethod()): ?>
+
+    <div class="cielo-checkout-onepage-success">
+
+        <?php if ($this->isBoletoPayment() || $this->isEletronicTransferPayment() || $this->isCheckoutPayment()): ?>
+            <div class="payment-url">
+                <?php echo Mage::helper('mozg_cielo')->__('<button id="cielo_transaction" type="submit" class="button" onclick="javascript:openPopupsMozg(\'%s\', \'WinXilinus\', \'Link\', \'Cielo\', \'cielo\');"><span><span>Click here to process transaction</span></span></button>', $this->getPaymentUrl()) ?>
+            </div>
+
+            <script type="text/javascript">
+
+            Event.observe (window, "load", function (event){
+                console.log('load');
+                console.log(event);
+                var target= 'target' in event ? event.target : event.srcElement;
+                console.log('clicked on '+target.tagName);
+
+                if($('cielo_transaction')){
+                    window.location.href = "#cielo_transaction";
+                    $('cielo_transaction').click();
+                }
+                
+            });
+
+            </script>
+        <?php endif; ?>
+
+    </div>
+
+<?php endif; ?>
+
+<!-- / <?php echo get_class($this) ?> -->
