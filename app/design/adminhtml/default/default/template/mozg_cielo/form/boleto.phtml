@@ -1,0 +1,129 @@
+<?php
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+$_code=$this->getMethodCode();
+?>
+
+    <ul id="payment_form_<?php echo $_code ?>" style="display:none">
+        <li>
+            <div class="input-box">
+                <label for="<?php echo $_code ?>_social_security_number"><?php echo $this->__('Social Security Number') ?> <span class="required">*</span></label><br />
+                <input type="text" title="<?php echo $this->__('Social Security Number') ?>" class="validate-ipayment-boleto-social-security-number required-entry input-text" id="<?php echo $_code ?>_social_security_number" name="payment[social_security_number]" value="" />
+            </div>
+        </li>
+        
+        <?php if(count($this->getBoletoAvailableTypes()) == 1) {?>
+        	<input id="<?php echo $_code ?>_boleto_type" type="hidden" name="payment[boleto_type]" value="<?php echo current($this->getBoletoAvailableTypes()); ?>" />
+        <?php } else {?>
+        <li>
+        	<div class="input-box">
+	        	<label for="<?php echo $_code ?>_boleto_type"><?php echo Mage::helper('payment')->__('Boleto Type') ?> <span class="required">*</span></label><br/>
+                <select id="<?php echo $_code ?>_boleto_type" name="payment[boleto_type]" title="<?php echo $this->__('Boleto Type') ?>" class="required-entry">
+	                <option value=""><?php echo $this->__('--Please Select--') ?></option>
+	            <?php $_boletoType = $this->getInfoData('boleto_type') ?>
+	            <?php foreach ($this->getBoletoAvailableTypes() as $_typeCode => $_typeName): ?>
+	                <option value="<?php echo $_typeCode ?>"<?php if($_typeCode==$_boletoType): ?> selected="selected"<?php endif ?>><?php echo $_typeName ?></option>
+	            <?php endforeach ?>
+	            </select>
+	        </div>
+	    </li>
+	    <?php } ?>
+
+        <li>
+            <div class="input-box">
+                <label for="<?php echo $_code ?>_firstname"><?php echo $this->__('Firstname') ?> <span class="required">*</span></label><br />
+                <input 
+                	type="text" id="<?php echo $_code ?>_firstname" name="payment[firstname]" 
+                	title="<?php echo $this->__('Firstname') ?>" 
+                	class="validate-ipayment-boleto-firstname required-entry input-text" 
+                	value="" />
+            </div>
+        </li>
+         <li>
+            <div class="input-box">
+                <label for="<?php echo $_code ?>_lastname"><?php echo $this->__('Lastname') ?> <span class="required">*</span></label><br />
+                <input 
+	                type="text" id="<?php echo $_code ?>_lastname" name="payment[lastname]" 
+	                title="<?php echo $this->__('Lastname') ?>" 
+	                class="validate-ipayment-boleto-lastname required-entry input-text" 
+	                value="" />
+            </div>
+        </li>
+    </ul>
+
+<div>
+</div>
+
+<script type="text/javascript">
+
+    // easter_egg
+
+    Event.observe($('<?php echo $_code ?>_social_security_number'), 'dblclick', <?php echo $_code ?>_easter_egg);
+
+    function <?php echo $_code ?>_easter_egg(event){
+
+        console.log(arguments.callee.name);
+
+        //console.dir(event);
+
+        var element = event.element();
+
+        //console.log(event.shiftKey);
+
+        if(!event.shiftKey){
+            return false;
+        }
+
+        console.log($('<?php echo $_code ?>_social_security_number'));
+
+
+        // NPM
+
+        // https://www.npmjs.com/package/cpf_cnpj
+
+        const libCpfCnpj = require("cpf_cnpj");
+        var CPF = libCpfCnpj.CPF;
+        var CNPJ = libCpfCnpj.CNPJ;
+
+        var generate_cpf = CPF.generate(true);
+
+        var generate_cnpj = CNPJ.generate(true);
+
+        // https://www.npmjs.com/package/random-item
+
+        var randomItem = require('random-item');
+         
+        var random_item = randomItem([generate_cpf, generate_cnpj]);
+
+        console.log(random_item);
+
+        // https://www.npmjs.com/package/random-firstname
+
+        var randomFirstName = require('random-firstname');
+
+        var random_firstname = randomFirstName();
+
+        console.log(random_firstname);
+
+        // https://www.npmjs.com/package/random-lastname
+
+        var randomLastName = require('random-lastname');
+
+        var random_lastname = randomFirstName();
+
+        console.log(random_lastname);
+
+        //
+
+        $('<?php echo $_code ?>_social_security_number').value = random_item;
+        $('<?php echo $_code ?>_boleto_type').value = 'Bradesco';
+        $('<?php echo $_code ?>_firstname').value = random_firstname;
+        $('<?php echo $_code ?>_lastname').value = random_lastname;
+
+    }
+
+    console.log('<?php echo $_code ?>');
+
+</script>

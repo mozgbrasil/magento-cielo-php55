@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Mozg. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config>
+    <menu>
+        <sales>
+            <children>
+                <mozg_cielo module="mozg_cielo" translate="title">
+                    <title>Mozg Cielo Notification Queue</title>
+                    <sort_order>600</sort_order>
+                    <action>adminhtml/mozg_cielo_event_queue</action>
+                </mozg_cielo>
+            </children>
+        </sales>
+        <!--<report>
+            <children>
+                <salesroot>
+                    <children>
+                        <mozg_cielo_status translate="title" module="mozg_cielo">
+                            <title>Status da Transação (Cielo)</title>
+                            <action>adminhtml/mozg_cielo_status_transaction</action>
+                            <sort_order>600</sort_order>
+                        </mozg_cielo_status>
+                    </children>
+                </salesroot>
+            </children>
+        </report>-->
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <sales>
+                        <children>
+                            <mozg_cielo translate="title">
+                                <title>Mozg Cielo Notification Queue</title>
+                                <sort_order>600</sort_order>
+                            </mozg_cielo>
+                        </children>
+                    </sales>
+                    <!--<report>
+                        <children>
+                            <salesroot>
+                                <children>
+                                    <mozg_cielo_status translate="title" module="mozg_cielo">
+                                        <title>Status da Transação (Cielo)</title>
+                                        <sort_order>600</sort_order>
+                                    </mozg_cielo_status>
+                                </children>
+                            </salesroot>
+                        </children>
+                    </report>-->
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
